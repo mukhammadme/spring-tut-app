@@ -5,9 +5,31 @@
         xmlns:p="http://www.springframework.org/schema/p"
         xsi:schemaLocation="http://www.springframework.org/schema/beans
                http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-    <bean id="triangle" class="com.linc.Triangle" autowire="byName">
-
+    <bean id="parentTriangle" class="com.linc.Triangle" abstract="true">
+        <property name="points">
+            <list>
+                <ref bean="pointA"/>
+            </list>
+        </property>
     </bean>
+
+    <bean id="triangle1" class="com.linc.Triangle" parent="parentTriangle">
+        <property name="points">
+            <list merge="true">
+                <ref bean="pointB"/>
+                <ref bean="pointC"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="triangle2" class="com.linc.Triangle" parent="parentTriangle">
+        <property name="points">
+            <list merge="true">
+                <ref bean="pointB"/>
+            </list>
+        </property>
+    </bean>
+
     <bean id="pointA" class="com.linc.Point">
         <property name="x" value="0" />
         <property name="y" value="0" />
