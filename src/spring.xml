@@ -39,5 +39,9 @@
         <property name="locations" value="pointsconfig.properties" />
     </bean>
 
+    <bean id="circle" class="com.linc.Circle">
+        <property name="center" ref="pointA" />
+    </bean>
+
     <alias name="triangle" alias="triangle-alias"/>
 </beans>

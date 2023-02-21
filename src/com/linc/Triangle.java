@@ -2,7 +2,7 @@ package com.linc;
 
 import java.util.List;
 
-public class Triangle {
+public class Triangle implements Shape {
     private List<Point> points;
 
     public List<Point> getPoints() {
@@ -14,6 +14,7 @@ public class Triangle {
     }
 
     public void draw() {
+        System.out.println("Drawing Triangle");
         for (Point point : this.points) {
             System.out.println("Point = (" + point.getX() + ", " + point.getY() + ")");
         }
