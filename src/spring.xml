@@ -43,5 +43,7 @@
         <property name="center" ref="pointA" />
     </bean>
 
+    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
+
     <alias name="triangle" alias="triangle-alias"/>
 </beans>
