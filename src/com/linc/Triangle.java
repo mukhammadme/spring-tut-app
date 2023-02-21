@@ -1,11 +1,8 @@
 package com.linc;
 
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
-public class Triangle implements InitializingBean, DisposableBean {
+public class Triangle {
     private List<Point> points;
 
     public List<Point> getPoints() {
@@ -20,23 +17,5 @@ public class Triangle implements InitializingBean, DisposableBean {
         for (Point point : this.points) {
             System.out.println("Point = (" + point.getX() + ", " + point.getY() + ")");
         }
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println("InitializingBean init method call for Triangle");
-    }
-
-    @Override
-    public void destroy() throws Exception {
-        System.out.println("DisposableBean destroy method call for Triangle");
-    }
-
-    public void myInit() {
-        System.out.println("My init method call for Triangle");
-    }
-
-    public void myDestroy() {
-        System.out.println("My destroy method call for Triangle");
     }
 }
