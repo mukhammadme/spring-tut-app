@@ -1,6 +1,8 @@
 package com.linc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
@@ -9,8 +11,9 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 @Component
-public class Circle implements Shape {
+public class Circle implements Shape, ApplicationEventPublisherAware {
     private Point center;
+    private ApplicationEventPublisher publisher;
     @Autowired
     private MessageSource messageSource;
 
@@ -35,7 +38,8 @@ public class Circle implements Shape {
     public void draw() {
         System.out.println(this.messageSource.getMessage("drawing.circle", null, "Default Drawing Message", null));
         System.out.println(this.messageSource.getMessage("drawing.point", new Object[]{this.center.getX(), this.center.getY()}, "Default Point Message", null));
-//        System.out.println(this.messageSource.getMessage("greeting", null, "Default Greeting", null));
+        DrawEvent drawEvent = new DrawEvent(this);
+        this.publisher.publishEvent(drawEvent);
     }
 
     @PostConstruct
@@ -46,5 +50,10 @@ public class Circle implements Shape {
     @PreDestroy
     public void destroyCircle() {
         System.out.println("Circle destroy method");
+    }
+
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.publisher = applicationEventPublisher;
     }
 }
