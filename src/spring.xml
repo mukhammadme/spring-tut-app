@@ -39,9 +39,7 @@
         <property name="locations" value="pointsconfig.properties" />
     </bean>
 
-    <bean id="circle" class="com.linc.Circle">
-
-    </bean>
-
     <context:annotation-config />
+
+    <context:component-scan base-package="com.linc" />
 </beans>
