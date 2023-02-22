@@ -1,7 +1,10 @@
 package com.linc;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+
+;
 
 public class Circle implements Shape {
     private Point center;
@@ -10,8 +13,7 @@ public class Circle implements Shape {
         return center;
     }
 
-    @Autowired
-    @Qualifier(value = "circleRelated")
+    @Resource(name = "pointC")
     public void setCenter(Point center) {
         this.center = center;
     }
@@ -20,5 +22,15 @@ public class Circle implements Shape {
     public void draw() {
         System.out.println("Drawing Circle");
         System.out.println("Circle Point is: (" + center.getX() + ", " + center.getY() + ")");
+    }
+
+    @PostConstruct
+    public void initializeCircle() {
+        System.out.println("Circle initialization method");
+    }
+
+    @PreDestroy
+    public void destroyCircle() {
+        System.out.println("Circle destroy method");
     }
 }
